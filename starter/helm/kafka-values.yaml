@@ -2,6 +2,14 @@
 # Single broker, no auth — course sandbox only, NEVER production.
 #   helm install kafka bitnami/kafka -n <your-namespace> -f helm/kafka-values.yaml
 
+# Bitnami removed legacy tags from docker.io/bitnami in 2025; pull from bitnamilegacy instead
+global:
+  security:
+    allowInsecureImages: true
+
+image:
+  repository: bitnamilegacy/kafka
+
 controller:
   replicaCount: 1
   resources:

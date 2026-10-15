@@ -5,6 +5,11 @@
 
 executor: KubernetesExecutor
 
+# Run migrations as a regular Job, not a Helm hook — required for `helm --wait` and GitOps tools
+migrateDatabaseJob:
+  useHelmHooks: false
+  applyCustomEnv: false
+
 # Sync DAGs from your course repository
 dags:
   gitSync:
@@ -35,6 +40,8 @@ dagProcessor:
       memory: 512Mi
 
 triggerer:
+  persistence:
+    enabled: false # avoids PVC binding stalls in the course sandbox
   resources:
     requests:
       cpu: 250m

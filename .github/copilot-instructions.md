@@ -29,6 +29,14 @@ This repository contains prototype Skill Practice assignments for CSAI 380 (AI O
 - Secrets in manifests must use `secretKeyRef` / GitHub Actions secrets; never inline passwords, even as examples.
 - Anything insecure-by-design for teaching (single-node MySQL, public load balancer) must say so explicitly in the exercise text.
 
+## Teacher notes and solutions
+
+- When an exercise is finished (tested and verified), write teacher notes in a separate README under a `solutions/` directory, one subdirectory per exercise: `solutions/N.4/README.md`.
+- Each solutions README must include:
+  - **Solutions** — the completed commands, manifests, code, or configuration for every student-facing step, including completed versions of any `# TODO(student)` stubs.
+  - **Gotchas** — pitfalls students may encounter, discovered during verification testing (e.g., Apple Silicon images crashing on amd64 nodes, GCE quota scale-up failures, chart key renames), each with its symptom and fix.
+- Keep solutions out of `starter/` — students receive starter files, not solutions.
+
 ## Conventions
 
 - Assignments follow the W26 Canvas template: `# N.4 Title`, `## Purpose:`, `## Instructions:`, `## Grading` with a 15-point rubric (three criteria at 5/3/1/0).
