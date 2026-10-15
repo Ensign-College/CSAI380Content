@@ -1,6 +1,7 @@
 # Values for the apache-airflow/airflow Helm chart (Airflow 3).
 # This file is the source of truth for Airflow config — change it here, not in the UI.
 #   helm upgrade --install airflow apache-airflow/airflow -n <your-namespace> -f helm/airflow-values.yaml
+# Resource requests are deliberately small to fit course-sandbox GCP quotas.
 
 executor: KubernetesExecutor
 
@@ -14,11 +15,33 @@ dags:
     # 3.4 Part Four: try changing this interval and verify the effect
     period: 60s
 
-webserver:
+# Airflow 3 renamed the webserver component to apiServer
+apiServer:
   resources:
     requests:
       cpu: 250m
       memory: 512Mi
+
+scheduler:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+
+dagProcessor:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+
+triggerer:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+
+statsd:
+  enabled: false # not needed for the exercise; saves sandbox quota
 
 # Course sandbox sizing — not production values
 workers:

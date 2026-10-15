@@ -4,9 +4,6 @@ Transform and load are provided; the extract phase is yours (3.4 Part Two).
 """
 from __future__ import annotations
 
-import csv
-import io
-import json
 from datetime import datetime
 
 from airflow.decorators import dag, task
