@@ -1,0 +1,21 @@
+# Values for the bitnami/kafka Helm chart.
+# Single broker, no auth — course sandbox only, NEVER production.
+#   helm install kafka bitnami/kafka -n <your-namespace> -f helm/kafka-values.yaml
+
+controller:
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+
+listeners:
+  client:
+    protocol: PLAINTEXT # no TLS/auth for the exercise — note why in your README
+
+persistence:
+  enabled: true
+  size: 5Gi

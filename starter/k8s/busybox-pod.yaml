@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: <your-namespace>
+  labels:
+    app: busybox
+spec:
+  containers:
+    - name: busybox
+      image: busybox:1.36
+      # Keep the container alive so you can inspect it
+      command: ["sh", "-c", "echo BusyBox started; sleep 3600"]
+  restartPolicy: Never

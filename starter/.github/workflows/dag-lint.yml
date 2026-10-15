@@ -1,0 +1,25 @@
+name: DAG Lint
+
+on:
+  pull_request:
+    paths:
+      - "dags/**"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install linter
+        run: pip install ruff
+
+      - name: Lint DAGs
+        run: ruff check dags/
+
+      - name: Import check (a DAG with a syntax error cannot merge)
+        run: python -m py_compile dags/*.py

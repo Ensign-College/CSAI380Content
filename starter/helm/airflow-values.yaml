@@ -1,0 +1,33 @@
+# Values for the apache-airflow/airflow Helm chart (Airflow 3).
+# This file is the source of truth for Airflow config — change it here, not in the UI.
+#   helm upgrade --install airflow apache-airflow/airflow -n <your-namespace> -f helm/airflow-values.yaml
+
+executor: KubernetesExecutor
+
+# Sync DAGs from your course repository
+dags:
+  gitSync:
+    enabled: true
+    repo: https://github.com/<your-username>/<your-course-repo>.git
+    branch: main
+    subPath: dags
+    # 3.4 Part Four: try changing this interval and verify the effect
+    period: 60s
+
+webserver:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+
+# Course sandbox sizing — not production values
+workers:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+
+env: []
+# Example for 3.4 Part Four (add a variable and verify it appears in the pod):
+#   - name: CSAI380_STUDENT
+#     value: "<your-username>"

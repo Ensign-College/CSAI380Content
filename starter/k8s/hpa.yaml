@@ -1,0 +1,21 @@
+# CPU-based HPA for a processing component (5.4 Part Four).
+# Requires resource requests on the target deployment and metrics-server (built into GKE).
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: consumer-hpa
+  namespace: <your-namespace>
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: logging-consumer
+  minReplicas: 1
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60

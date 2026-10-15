@@ -1,0 +1,51 @@
+# Single-node MySQL — fine for this course, NOT production-grade (no HA/clustering).
+# Create the secret first (never commit passwords):
+#   kubectl create secret generic mysql-credentials -n <your-namespace> \
+#     --from-literal=root-password='<choose-a-password>'
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: <your-namespace>
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  # Recreate avoids two pods fighting over the same RWO volume during rollout
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.4
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-credentials
+                  key: root-password
+            - name: MYSQL_DATABASE
+              value: csai380
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mysql-data

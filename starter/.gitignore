@@ -1,0 +1,8 @@
+# Terraform state and secrets must never be committed
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+*.json.key
+*-sa-key.json

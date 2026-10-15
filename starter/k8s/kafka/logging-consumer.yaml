@@ -1,0 +1,37 @@
+# Logging consumer/sink: writes every event on the topic to its pod logs (4.4 Part Three).
+# Verify with: kubectl logs deploy/logging-consumer -n <your-namespace> -f
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-consumer
+  namespace: <your-namespace>
+  labels:
+    app: logging-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logging-consumer
+  template:
+    metadata:
+      labels:
+        app: logging-consumer
+    spec:
+      containers:
+        - name: consumer
+          image: bitnami/kafka:3.9
+          command:
+            - kafka-console-consumer.sh
+            - --bootstrap-server
+            - kafka.<your-namespace>.svc.cluster.local:9092
+            - --topic
+            - practice-events
+            - --group
+            - logging-sink
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 250m
+              memory: 512Mi
