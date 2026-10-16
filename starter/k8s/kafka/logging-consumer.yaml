@@ -19,7 +19,8 @@ spec:
     spec:
       containers:
         - name: consumer
-          image: bitnami/kafka:3.9
+          # bitnamilegacy: Bitnami removed old tags from docker.io/bitnami in 2025
+          image: bitnamilegacy/kafka:4.0.0-debian-12-r10
           command:
             - kafka-console-consumer.sh
             - --bootstrap-server
