@@ -35,7 +35,8 @@ Partitioning answer: ordering is guaranteed only within a partition; messages wi
 | Producer succeeds but consumer times out with 0 messages | Single broker can't create `__consumer_offsets` (default replication factor 3), so consumer groups never form | `overrideConfiguration` with `offsets.topic.replication.factor: 1` etc. (in starter values) — note the chart key is `overrideConfiguration`, NOT `extraConfig` |
 | `error: unable to upgrade connection: container not found` | exec raced the pod during a config-change rolling restart | `kubectl rollout status statefulset/kafka-controller` before exec'ing |
 | Consumer output hidden by `Defaulted container` notice | Pod has an init container | Harmless; filter with `grep -v Defaulted` |
+| PVC provisions at 8Gi no matter what `persistence.size` says | KRaft chart ignores top-level `persistence:`; sizing lives per-role | Set `controller.persistence.size` (in starter values); also note PVC size is immutable — resizing requires delete + reinstall |
 
 ## Verification status
 
-All steps executed: Helm install, topic creation, console round-trip (3/3 messages), and logging sink receiving produced events.
+All steps executed: Helm install, topic creation, console round-trip (3/3 messages), and logging sink receiving produced events. Re-tested 2026-10-15 after moving PVC sizing to `controller.persistence.size: 2Gi`; verified the PVC provisions at 2Gi and the full produce→consume→sink path works on it.

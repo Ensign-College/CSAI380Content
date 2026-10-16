@@ -50,11 +50,12 @@ Any change to `helm/airflow-values.yaml` is applied with the same `helm upgrade`
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | All components stuck `Init:...`, migrations never run, `helm --wait` times out | Chart runs DB migrations as a Helm post-install hook, which `--wait` blocks forever | `migrateDatabaseJob.useHelmHooks: false` (already in starter values) |
-| `FailedScaleUp: GCE quota exceeded`, pods Pending | Chart default resource requests exceed sandbox quota | Small per-component requests + `statsd.enabled: false` (in starter values) |
-| Triggerer Pending on `VolumeBinding` | Triggerer log PVC stalls on Autopilot | `triggerer.persistence.enabled: false` (in starter values) |
+| `FailedScaleUp: GCE quota exceeded`, pods Pending | Chart default resource requests exceed sandbox quota | Small per-component requests + `statsd.enabled: false` + `triggerer.enabled: false` (in starter values) |
+| Pods Pending even with small component requests | **GKE Autopilot defaults every container without explicit requests to 500m/2Gi** — git-sync and log-groomer sidecars silently claim ~2 CPU/6Gi per Airflow pod | Explicit `resources` on `dags.gitSync`, each `logGroomerSidecar`, and `migrateDatabaseJob` (in starter values) |
+| Triggerer Pending on `VolumeBinding` | Triggerer log PVC stalls on Autopilot | Triggerer is disabled entirely in starter values (`triggerer.enabled: false`) — no deferrable operators in this exercise |
 | `webserver:` values ignored | Airflow 3 chart renamed the component | Use `apiServer:` |
 | ruff fails on the starter DAG | Unused imports fail the exercise's own lint CI | Keep top-level imports minimal; import inside tasks |
 
 ## Verification status
 
-Airflow 3.2.2 deployed from starter values; `csai380_etl_pipeline` registered via gitSync from this repo; bucket Terraform applied; DAG compiles and lints. The full DAG run (extract→transform→load) requires the student's extract implementation plus Redis/MySQL connections, exercised in the block project.
+Airflow 3 deployed from starter values; `csai380_etl_pipeline` registered via gitSync from this repo; bucket Terraform applied; DAG compiles and lints. Re-tested 2026-10-15 after quota right-sizing (log persistence off, metadata DB 2Gi, triggerer disabled, explicit sidecar/migration-job requests): fresh install converges with no Pending pods and no log PVCs. The full DAG run (extract→transform→load) requires the student's extract implementation plus Redis/MySQL connections, exercised in the block project.
