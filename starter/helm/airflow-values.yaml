@@ -50,6 +50,16 @@ triggerer:
 statsd:
   enabled: false # not needed for the exercise; saves sandbox quota
 
+# Shared-cluster disk quota is tight: keep task logs on emptyDir and shrink the metadata DB volume
+logs:
+  persistence:
+    enabled: false
+
+postgresql:
+  primary:
+    persistence:
+      size: 2Gi
+
 # Course sandbox sizing — not production values
 workers:
   resources:

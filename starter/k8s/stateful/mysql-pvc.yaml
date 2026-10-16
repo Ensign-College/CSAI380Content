@@ -8,5 +8,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: 2Gi # small on purpose — shared-cluster disk quota; plenty for the exercise
   # Omit storageClassName to use the cluster default; record which class was bound in NOTES.md

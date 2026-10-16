@@ -56,4 +56,4 @@ GKE default StorageClass observed: `standard-rwo`, access mode `ReadWriteOnce` (
 
 ## Verification status
 
-All steps executed successfully, both rounds, including data-loss and data-survival verification.
+All steps executed successfully, both rounds, including data-loss and data-survival verification. Re-tested 2026-10-15 after right-sizing the starter PVC to 2Gi (quota); survival confirmed on the 2Gi volume. Note: on a fresh PVC, MySQL's first boot initializes the data directory for ~30–60s after the rollout reports complete — retry `kubectl exec` if you hit `ERROR 2002 (HY000)`.
