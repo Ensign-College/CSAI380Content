@@ -40,5 +40,6 @@ This repository contains prototype Skill Practice assignments for CSAI 380 (AI O
 ## Conventions
 
 - Assignments follow the W26 Canvas template: `# N.4 Title`, `## Purpose:`, `## Instructions:`, `## Grading` with a 15-point rubric (three criteria at 5/3/1/0).
+- **Every assignment must include an `## AI Ops Connection:` section** (between Instructions and Grading) reinforcing both senses of AI Operations: (a) *operate with AI* — a concrete, exercise-specific task where students use an agent with a defined goal and record the agent loop in their README, and (b) *operate for AI* — 3–4 sentences students write connecting the skill to running ML training, hosting models, and hosting applications connected to those models.
 - All student work is submitted as a GitHub repository link; exercises must keep the IaC + GitHub Actions thread consistent week to week.
 - Flat file naming in repo root: `N.4-<slug>.md`.
