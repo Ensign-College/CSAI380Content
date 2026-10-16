@@ -25,6 +25,7 @@ This repository contains prototype Skill Practice assignments for CSAI 380 (AI O
 
 ## Security rules for starter content
 
+- **Never touch the `default` namespace.** It contains real (non-exercise) workloads and data. All exercise and verification resources live in dedicated namespaces (e.g., the student's username namespace, `verify-stedi`); never deploy to, scale, or delete anything in `default`.
 - Never commit credentials, service-account keys, tokens, or `.tfstate` files — the starter `.gitignore` must cover these.
 - Secrets in manifests must use `secretKeyRef` / GitHub Actions secrets; never inline passwords, even as examples.
 - Anything insecure-by-design for teaching (single-node MySQL, public load balancer) must say so explicitly in the exercise text.
@@ -39,7 +40,7 @@ This repository contains prototype Skill Practice assignments for CSAI 380 (AI O
 
 ## Conventions
 
-- Assignments follow the W26 Canvas template: `# N.4 Title`, `## Purpose:`, `## Instructions:`, `## Grading` with a 15-point rubric (three criteria at 5/3/1/0).
-- **Every assignment must include an `## AI Ops Connection:` section** (between Instructions and Grading) reinforcing both senses of AI Operations: (a) *operate with AI* — a concrete, exercise-specific task where students use an agent with a defined goal and record the agent loop in their README, and (b) *operate for AI* — a stated connection between the skill and running ML training, hosting models, and hosting applications connected to those models.
+- Assignments follow the W26 Canvas template: `# N.4 Title`, `## Purpose:`, `## AI Ops in This Assignment:`, `## Instructions:`, `## Grading` with a 15-point rubric (three criteria at 5/3/1/0).
+- **Every assignment must include an `## AI Ops in This Assignment:` section** (between `## Purpose:` and `## Instructions:`) reinforcing both senses of AI Operations: **(a) use an agent to do the ops** — a concrete, exercise-specific task where students use an agent with a defined goal and record the agent loop in their **AI Ops reflection**, and **(b) build infrastructure that AI operations run on** — a stated connection between the skill and running ML training, hosting models, and hosting applications connected to those models.
 - All student work is submitted as a GitHub repository link; exercises must keep the IaC + GitHub Actions thread consistent week to week.
 - Flat file naming in repo root: `N.4-<slug>.md`.
