@@ -12,6 +12,10 @@ image:
 
 controller:
   replicaCount: 1
+  # Persistence lives under controller (KRaft chart) — a top-level `persistence:` block is silently ignored
+  persistence:
+    enabled: true
+    size: 2Gi # small on purpose — shared-cluster disk quota; plenty for exercise topics
   resources:
     requests:
       cpu: 250m
@@ -29,7 +33,3 @@ overrideConfiguration:
   offsets.topic.replication.factor: 1
   transaction.state.log.replication.factor: 1
   transaction.state.log.min.isr: 1
-
-persistence:
-  enabled: true
-  size: 5Gi
