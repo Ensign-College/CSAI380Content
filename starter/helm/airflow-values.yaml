@@ -9,6 +9,10 @@ executor: KubernetesExecutor
 migrateDatabaseJob:
   useHelmHooks: false
   applyCustomEnv: false
+  resources:
+    requests:
+      cpu: 100m # explicit — Autopilot defaults unspecified containers to 500m, which can strand the job Pending
+      memory: 256Mi
 
 # Sync DAGs from your course repository
 dags:
@@ -19,6 +23,11 @@ dags:
     subPath: dags
     # 3.4 Part Four: try changing this interval and verify the effect
     period: 60s
+    # Explicit sidecar sizing — GKE Autopilot defaults unspecified containers to 500m/2Gi, which blows the sandbox quota
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
 
 # Airflow 3 renamed the webserver component to apiServer
 apiServer:
@@ -32,14 +41,25 @@ scheduler:
     requests:
       cpu: 250m
       memory: 512Mi
+  logGroomerSidecar:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
 
 dagProcessor:
   resources:
     requests:
-      cpu: 250m
-      memory: 512Mi
+      cpu: 100m # small — a handful of course DAGs; larger requests strand it Pending on full sandbox nodes
+      memory: 256Mi
+  logGroomerSidecar:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
 
 triggerer:
+  enabled: false # no deferrable operators in this exercise — saves a whole pod of CPU/memory quota
   persistence:
     enabled: false # avoids PVC binding stalls in the course sandbox
   resources:
