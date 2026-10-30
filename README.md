@@ -2,7 +2,7 @@
 
 Prototype weekly Skill Practice assignments for CSAI 380 (AI infrastructure on GKE/GCP, with Terraform and GitHub Actions).
 
-Exercises are only marked ✅ VERIFIED after every step has been executed against a real GKE/GCP environment — see [.github/copilot-instructions.md](.github/copilot-instructions.md). Student-facing starter files live in [starter/](starter/), mirroring the student repository layout.
+Exercises are only marked ✅ VERIFIED after every step has been executed against a real GKE/GCP environment — see [AGENTS.md](AGENTS.md). Student-facing starter files live in [starter/](starter/), mirroring the student repository layout.
 
 ## Table of Contents
 
