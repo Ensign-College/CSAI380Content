@@ -69,11 +69,12 @@ Each student receives their own unique GCP project from Vocareum and creates the
 
 ## Teacher notes and solutions
 
-- When an exercise is finished (tested and verified), write teacher notes in a separate README under a `solutions/` directory, one subdirectory per exercise: `solutions/N.4/README.md`.
+- Instructor solutions and teacher notes live in each exercise's `CSAI380-*-starter` repo, on its `solutions` branch (not on `main`), at `solutions/README.md`. Never add them to this repository.
+- When an exercise is finished (tested and verified), write its teacher notes on that starter repo's `solutions` branch.
 - Each solutions README must include:
   - **Solutions** — the completed commands, manifests, code, or configuration for every student-facing step, including completed versions of any `# TODO(student)` stubs.
   - **Gotchas** — pitfalls students may encounter, discovered during verification testing (e.g., Apple Silicon images crashing on amd64 nodes, GCE quota scale-up failures, chart key renames), each with its symptom and fix.
-- Keep solutions out of `starter/` — students receive starter files, not solutions.
+- Keep solutions out of `starter/` and off starter repos' `main` — students receive starter files, not solutions.
 
 ## Conventions
 
