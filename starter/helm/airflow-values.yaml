@@ -70,7 +70,7 @@ triggerer:
 statsd:
   enabled: false # not needed for the exercise; saves sandbox quota
 
-# Shared-cluster disk quota is tight: keep task logs on emptyDir and shrink the metadata DB volume
+# Your project's disk quota (SSD_TOTAL_GB) is tight: keep task logs on emptyDir and shrink the metadata DB volume
 logs:
   persistence:
     enabled: false

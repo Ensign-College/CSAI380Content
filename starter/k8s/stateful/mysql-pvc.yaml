@@ -8,5 +8,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi # small on purpose — shared-cluster disk quota; plenty for the exercise
+      storage: 2Gi # small on purpose — your project's disk quota is limited; plenty for the exercise
   # Omit storageClassName to use the cluster default; record which class was bound in NOTES.md
