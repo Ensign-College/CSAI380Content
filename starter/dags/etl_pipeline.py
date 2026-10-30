@@ -10,7 +10,7 @@ from airflow.decorators import dag, task
 
 GCS_BUCKET = "<project-id>-<your-username>-raw-data"
 COUNTRY_CSV_OBJECT = "country-codes.csv"
-REDIS_CONN_HOST = "redis.<your-namespace>.svc.cluster.local"
+REDIS_CONN_HOST = "stedi-simulator.<your-namespace>.svc.cluster.local"  # k8s/stedi-simulator.yaml
 MYSQL_CONN_ID = "csai380_mysql"  # define in Airflow Connections
 
 
