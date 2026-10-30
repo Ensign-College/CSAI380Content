@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
-  REGION: us-central1
+  REGION: us-east1
   # Replace with your values from the Terraform outputs
   PROJECT_ID: <project-id>
   REPOSITORY: <your-username>-images

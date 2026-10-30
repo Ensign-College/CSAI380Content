@@ -15,7 +15,7 @@ controller:
   # Persistence lives under controller (KRaft chart) — a top-level `persistence:` block is silently ignored
   persistence:
     enabled: true
-    size: 2Gi # small on purpose — shared-cluster disk quota; plenty for exercise topics
+    size: 2Gi # small on purpose — your project's disk quota is limited; plenty for exercise topics
   resources:
     requests:
       cpu: 250m

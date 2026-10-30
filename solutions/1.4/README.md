@@ -1,8 +1,19 @@
 # 1.4 Build, Deploy, and Explore — Teacher Notes
 
-Verified 2026-10-15 against GKE Autopilot `autopilot-cluster-1` (us-central1), project `helpful-ally-451215-a3`.
+Verified 2026-10-15 against GKE Autopilot cluster (us-central1) in an instructor test project.
 
 ## Solutions
+
+### Part One: Create the cluster
+
+Verified 2026-10-29 (cluster created in us-east1 because us-central1 was out of capacity). Creation took about 4.5 minutes; `kubectl get nodes` returns `No resources found` until the first pod triggers an Autopilot scale-up.
+
+```bash
+gcloud services enable container.googleapis.com
+gcloud container clusters create-auto <cluster-name> --region us-east1
+gcloud container clusters get-credentials <cluster-name> --region us-east1
+kubectl get nodes
+```
 
 ### Part Two: Terraform
 
@@ -11,7 +22,7 @@ Working variable values (per student):
 ```hcl
 # terraform.tfvars — never committed
 project_id   = "<vocareum-project-id>"
-region       = "us-central1"
+region       = "us-east1"
 student_name = "<github-username-lowercase>"
 ```
 
@@ -44,8 +55,8 @@ docker build --platform linux/amd64 -t hello-app:latest .
 docker run --rm -p 8080:8080 -e STUDENT_NAME=me hello-app:latest
 curl http://localhost:8080/                   # "Hello from me's container!"
 
-AR=us-central1-docker.pkg.dev/<project>/<user>-images
-gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+AR=us-east1-docker.pkg.dev/<project>/<user>-images
+gcloud auth configure-docker us-east1-docker.pkg.dev --quiet
 docker tag hello-app:latest $AR/hello-app:latest
 docker push $AR/hello-app:latest
 docker rmi  $AR/hello-app:latest && docker pull $AR/hello-app:latest
@@ -73,6 +84,8 @@ kubectl delete pod <one-hello-app-pod> -n <ns>   # replacement appears in ~10s
 | `oauth2: "invalid_grant"` from Terraform | Stale application-default credentials | `gcloud auth application-default login` |
 | Autopilot warning `defaulted unspecified 'cpu' resource` | Autopilot injects resource defaults | Harmless; or set explicit requests as the starter manifests do |
 | First rollout takes minutes | Autopilot provisioning a node | Wait; `kubectl get events -n <ns>` shows `TriggeredScaleUp` |
+| `create-auto` fails: `Google Compute Engine does not have enough resources available to fulfill request: us-central1` | Regional capacity shortage (seen 2026-10-29) | Delete the cluster left in `ERROR` (`gcloud container clusters delete <cluster-name> --region <region>`), then retry later or create it in another region and use that region in `get-credentials`. The course moved to us-east1 after this shortage. |
+| `kubectl logs` returns `No agent available` right after a pod starts | The new Autopilot node's connectivity agent is still starting | Wait ~30 seconds and retry |
 | CI workflow fails on auth | `GCP_SA_KEY` secret missing/malformed | Repository secret must contain the full SA key JSON |
 
 ## Verification status

@@ -1,6 +1,6 @@
 # 3.4 ETL Skill Practice — Teacher Notes
 
-Verified 2026-10-15 against GKE Autopilot `autopilot-cluster-1` (us-central1), project `helpful-ally-451215-a3`.
+Verified 2026-10-15 against GKE Autopilot cluster (us-central1) in an instructor test project. Part One re-verified 2026-10-29 with the new `us-east1` region default: the bucket is created in `US-EAST1`, and the extract solution's GCS client reads the uploaded CSV (249 rows).
 
 ## Solutions
 

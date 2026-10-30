@@ -1,6 +1,6 @@
 # 4.4 Kafka Skill Practice — Teacher Notes
 
-Verified 2026-10-15 against GKE Autopilot `autopilot-cluster-1` (us-central1), project `helpful-ally-451215-a3`.
+Verified 2026-10-15 against GKE Autopilot cluster (us-central1) in an instructor test project.
 
 ## Solutions
 
