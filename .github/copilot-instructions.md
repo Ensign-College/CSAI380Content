@@ -22,6 +22,7 @@ This repository contains prototype Skill Practice assignments for CSAI 380 (AI O
   - `starter/.github/workflows/` — GitHub Actions workflows (kept under `starter/` so they do not execute in this repo)
 - Placeholders students must replace are written as `<angle-brackets>` (e.g., `<your-namespace>`); TODOs students must implement are marked `# TODO(student):`.
 - When an exercise references a starter file, link it by repo-relative path so the reference can be verified.
+- Each `CSAI380-*-starter` repo's README only links to its assignment file in this repository. Never copy instructions into a starter repo README; this repository is the single source of truth.
 
 ## Security rules for starter content
 
