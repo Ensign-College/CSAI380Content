@@ -6,7 +6,7 @@ Verified 2026-10-15 against GKE Autopilot `autopilot-cluster-1` (us-central1), p
 
 ### Part One: Create the cluster
 
-Not yet re-verified (students previously used a pre-existing cluster):
+Verified 2026-10-29 (cluster created in us-east1 because us-central1 was out of capacity). Creation took about 4.5 minutes; `kubectl get nodes` returns `No resources found` until the first pod triggers an Autopilot scale-up.
 
 ```bash
 gcloud services enable container.googleapis.com
@@ -84,6 +84,8 @@ kubectl delete pod <one-hello-app-pod> -n <ns>   # replacement appears in ~10s
 | `oauth2: "invalid_grant"` from Terraform | Stale application-default credentials | `gcloud auth application-default login` |
 | Autopilot warning `defaulted unspecified 'cpu' resource` | Autopilot injects resource defaults | Harmless; or set explicit requests as the starter manifests do |
 | First rollout takes minutes | Autopilot provisioning a node | Wait; `kubectl get events -n <ns>` shows `TriggeredScaleUp` |
+| `create-auto` fails: `Google Compute Engine does not have enough resources available to fulfill request: us-central1` | Regional capacity shortage (seen 2026-10-29) | Delete the cluster left in `ERROR` (`gcloud container clusters delete <cluster-name> --region us-central1`), then retry later or create it in another region such as `us-east1` and use that region in `get-credentials` |
+| `kubectl logs` returns `No agent available` right after a pod starts | The new Autopilot node's connectivity agent is still starting | Wait ~30 seconds and retry |
 | CI workflow fails on auth | `GCP_SA_KEY` secret missing/malformed | Repository secret must contain the full SA key JSON |
 
 ## Verification status
