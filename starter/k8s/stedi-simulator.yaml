@@ -1,0 +1,75 @@
+# STEDI simulator: your STEDI image with SIMULATION=true, plus its own Redis.
+# Used in 3.4 (signup events for the ETL extract) and 4.4 (risk events into Kafka).
+# Simulator reference: https://github.com/STEDI-Balance/stedi-web#simulator-demo-data
+#
+# <stedi-image> is the STEDI image your 1.5 workflow pushed, built from a copy of
+# stedi-web downloaded in or after October 2026. List your images with:
+#   gcloud artifacts docker images list us-east1-docker.pkg.dev/<project-id>/<your-netid>-stedi-images --include-tags
+#
+# Apply:  sed 's/<your-namespace>/<ns>/' k8s/stedi-simulator.yaml | kubectl apply -f -
+# Park:   kubectl scale deployment stedi-simulator --replicas=0 -n <your-namespace>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stedi-simulator
+  namespace: <your-namespace>
+  labels:
+    app: stedi-simulator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stedi-simulator
+  template:
+    metadata:
+      labels:
+        app: stedi-simulator
+    spec:
+      containers:
+        - name: stedi
+          image: <stedi-image>
+          env:
+            - name: SIMULATION
+              value: "true"
+            - name: REDIS_HOST
+              value: "localhost"   # the redis container below, in the same pod
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_PASSWORD
+              value: ""
+            - name: REDIS_DB
+              value: "0"
+            # 4.4: uncomment and point at your Kafka broker and topic
+            # - name: KAFKA_BROKER
+            #   value: "kafka.<your-namespace>.svc.cluster.local:9092"
+            # - name: KAFKA_STEDI_EVENTS_TOPIC
+            #   value: "<your-topic>"
+          ports:
+            - containerPort: 4567
+          resources:
+            requests:
+              cpu: 250m
+              memory: 768Mi
+        - name: redis
+          image: redis:8   # includes RedisJSON, which STEDI's risk scoring needs
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+---
+# Demo data only: no persistence and no password. Never use this Redis for real data.
+apiVersion: v1
+kind: Service
+metadata:
+  name: stedi-simulator
+  namespace: <your-namespace>
+spec:
+  selector:
+    app: stedi-simulator
+  ports:
+    - name: http
+      port: 4567
+    - name: redis
+      port: 6379
