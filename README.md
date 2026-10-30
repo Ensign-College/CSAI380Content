@@ -19,7 +19,7 @@ Exercises are only marked ✅ VERIFIED after every step has been executed agains
 | 5 | [5.4 Scaling Skill Practice: Measure, Scale, Measure Again](5.4-scaling-hpa-practice.md) | Consumer groups, lag, GitOps replica scaling, HPA | [CSAI380-scaling-hpa-starter](https://github.com/Ensign-College/CSAI380-scaling-hpa-starter) | ✅ VERIFIED 2026-10-15 |
 | 5 | [5.5 Block Project: Scaling and Downstream Integration](https://github.com/Ensign-College/CSAI380FinalProject/blob/main/5.5-scaling-and-downstream-integration.md) | Consumer lag, scaling experiment, idempotent upsert, analytical SQL, final architecture | [CSAI380FinalProject](https://github.com/Ensign-College/CSAI380FinalProject) | 🚧 DRAFT |
 
-Each starter repo contains the exercise's student-facing files at the repo root; instructor solutions live on that repo's `solutions` branch (currently 1.4 and 2.4). The N.5 Block Project assignments build the STEDI balance-device platform stage by stage and live in the [CSAI380FinalProject](https://github.com/Ensign-College/CSAI380FinalProject) repository.
+Each starter repo contains the exercise's student-facing files at the repo root, and its README links back to the assignment file here — edit instructions only in this repository; instructor solutions live on that repo's `solutions` branch (currently 1.4 and 2.4). The N.5 Block Project assignments build the STEDI balance-device platform stage by stage and live in the [CSAI380FinalProject](https://github.com/Ensign-College/CSAI380FinalProject) repository.
 
 ¹ 1.4 verified except the GitHub Actions run, which awaits the classroom `GCP_SA_KEY` secret.
 
