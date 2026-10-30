@@ -4,6 +4,17 @@ Verified 2026-10-15 against GKE Autopilot `autopilot-cluster-1` (us-central1), p
 
 ## Solutions
 
+### Part One: Create the cluster
+
+Not yet re-verified (students previously used a pre-existing cluster):
+
+```bash
+gcloud services enable container.googleapis.com
+gcloud container clusters create-auto <cluster-name> --region us-central1
+gcloud container clusters get-credentials <cluster-name> --region us-central1
+kubectl get nodes
+```
+
 ### Part Two: Terraform
 
 Working variable values (per student):

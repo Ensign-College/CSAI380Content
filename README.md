@@ -8,8 +8,8 @@ Exercises are only marked ✅ VERIFIED after every step has been executed agains
 
 | Week | Assignment | Topic | Starter repo | Status |
 | ---- | ---------- | ----- | ------------ | ------ |
-| 1 | [1.4 Build, Deploy, and Explore](1.4-build-deploy-explore.md) | Docker image lifecycle, GKE deployments and services, Terraform intro, GitHub Actions build/push | [CSAI380-build-deploy-starter](https://github.com/Ensign-College/CSAI380-build-deploy-starter) | ✅ VERIFIED 2026-10-15¹ |
-| 1 | [1.5 Block Project: Collecting the Data](https://github.com/Ensign-College/CSAI380FinalProject/blob/main/1.5-collecting-the-data.md) | Containerize and deploy STEDI to GKE, Terraform namespace/registry, GitHub Actions build/push, architecture v1 | [CSAI380FinalProject](https://github.com/Ensign-College/CSAI380FinalProject) | ✅ VERIFIED 2026-10-15² |
+| 1 | [1.4 Build, Deploy, and Explore](1.4-build-deploy-explore.md) | Docker image lifecycle, GKE deployments and services, Terraform intro, GitHub Actions build/push | [CSAI380-build-deploy-starter](https://github.com/Ensign-College/CSAI380-build-deploy-starter) | 🚧 DRAFT¹ |
+| 1 | [1.5 Block Project: Collecting the Data](https://github.com/Ensign-College/CSAI380FinalProject/blob/main/1.5-collecting-the-data.md) | Containerize and deploy STEDI to GKE, Terraform namespace/registry, GitHub Actions build/push, architecture v1 | [CSAI380FinalProject](https://github.com/Ensign-College/CSAI380FinalProject) | 🚧 DRAFT² |
 | 2 | [2.4 Stateful Services: The Persistence Experiment](2.4-stateful-persistence-practice.md) | Redis/MySQL, PVs, PVCs, StorageClasses, StatefulSets, Secrets | [CSAI380-stateful-persistence-starter](https://github.com/Ensign-College/CSAI380-stateful-persistence-starter) | ✅ VERIFIED 2026-10-15 |
 | 2 | [2.5 Block Project: Saving the Data](https://github.com/Ensign-College/CSAI380FinalProject/blob/main/2.5-saving-the-data.md) | Redis and MySQL StatefulSets, headless services, secrets via secretKeyRef, persistence experiment | [CSAI380FinalProject](https://github.com/Ensign-College/CSAI380FinalProject) | ✅ VERIFIED 2026-10-15 |
 | 3 | [3.4 ETL Skill Practice: Extract, Transform, Reconfigure](3.4-etl-airflow-practice.md) | Airflow DAGs, GCS object storage via Terraform, Helm values, DAG lint CI | [CSAI380-etl-airflow-starter](https://github.com/Ensign-College/CSAI380-etl-airflow-starter) | ✅ VERIFIED 2026-10-15 |
@@ -21,6 +21,6 @@ Exercises are only marked ✅ VERIFIED after every step has been executed agains
 
 Each starter repo contains the exercise's student-facing files at the repo root, and its README links back to the assignment file here — edit instructions only in this repository; instructor solutions live on that repo's `solutions` branch (currently 1.4 and 2.4). The N.5 Block Project assignments build the STEDI balance-device platform stage by stage and live in the [CSAI380FinalProject](https://github.com/Ensign-College/CSAI380FinalProject) repository.
 
-¹ 1.4 verified except the GitHub Actions run, which awaits the classroom `GCP_SA_KEY` secret.
+¹ 1.4 was verified 2026-10-15 (except the GitHub Actions run, which awaits the classroom `GCP_SA_KEY` secret). It returned to DRAFT when Part One changed to have students create their own cluster.
 
-² 1.5 verified except a live GitHub Actions run, which awaits repo secrets; workflow commands were executed locally.
+² 1.5 was verified 2026-10-15 (except a live GitHub Actions run, which awaits repo secrets; workflow commands were executed locally). It returned to DRAFT when the STEDI source changed to the public [STEDI-Balance/stedi-web](https://github.com/STEDI-Balance/stedi-web) repository.
