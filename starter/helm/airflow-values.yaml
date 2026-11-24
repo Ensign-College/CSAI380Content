@@ -21,6 +21,8 @@ dags:
     repo: https://github.com/<your-username>/<your-course-repo>.git
     branch: main
     subPath: dags
+    # Secret with GITSYNC_USERNAME / GITSYNC_PASSWORD (a read-only GitHub PAT) so git-sync can clone your private repo
+    credentialsSecret: airflow-git-secret
     # 3.4 Part Four: try changing this interval and verify the effect
     period: 60s
     # Explicit sidecar sizing — GKE Autopilot defaults unspecified containers to 500m/2Gi, which blows the sandbox quota
